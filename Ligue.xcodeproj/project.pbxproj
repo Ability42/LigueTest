@@ -15,6 +15,10 @@
 		780E4B681DD7457200617623 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 780E4B661DD7457200617623 /* LaunchScreen.storyboard */; };
 		780E4B731DD7457200617623 /* LigueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 780E4B721DD7457200617623 /* LigueTests.m */; };
 		780E4B7E1DD7457200617623 /* LigueUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 780E4B7D1DD7457200617623 /* LigueUITests.m */; };
+		780E4B8D1DD7459000617623 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 780E4B8C1DD7459000617623 /* Player.m */; };
+		780E4B901DD7461000617623 /* Club.m in Sources */ = {isa = PBXBuildFile; fileRef = 780E4B8F1DD7461000617623 /* Club.m */; };
+		780E4B931DD7467600617623 /* models_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 780E4B921DD7467600617623 /* models_test.json */; };
+		780E4B961DD7484C00617623 /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 780E4B951DD7484C00617623 /* Match.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,13 @@
 		780E4B791DD7457200617623 /* LigueUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LigueUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		780E4B7D1DD7457200617623 /* LigueUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LigueUITests.m; sourceTree = "<group>"; };
 		780E4B7F1DD7457200617623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		780E4B8B1DD7459000617623 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		780E4B8C1DD7459000617623 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		780E4B8E1DD7461000617623 /* Club.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Club.h; sourceTree = "<group>"; };
+		780E4B8F1DD7461000617623 /* Club.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Club.m; sourceTree = "<group>"; };
+		780E4B921DD7467600617623 /* models_test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = models_test.json; sourceTree = "<group>"; };
+		780E4B941DD7484C00617623 /* Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Match.h; sourceTree = "<group>"; };
+		780E4B951DD7484C00617623 /* Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Match.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +116,7 @@
 				780E4B5C1DD7457200617623 /* AppDelegate.m */,
 				780E4B5E1DD7457200617623 /* ViewController.h */,
 				780E4B5F1DD7457200617623 /* ViewController.m */,
+				780E4B911DD7465700617623 /* Model */,
 				780E4B611DD7457200617623 /* Main.storyboard */,
 				780E4B641DD7457200617623 /* Assets.xcassets */,
 				780E4B661DD7457200617623 /* LaunchScreen.storyboard */,
@@ -138,6 +150,20 @@
 				780E4B7F1DD7457200617623 /* Info.plist */,
 			);
 			path = LigueUITests;
+			sourceTree = "<group>";
+		};
+		780E4B911DD7465700617623 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				780E4B921DD7467600617623 /* models_test.json */,
+				780E4B8B1DD7459000617623 /* Player.h */,
+				780E4B8C1DD7459000617623 /* Player.m */,
+				780E4B8E1DD7461000617623 /* Club.h */,
+				780E4B8F1DD7461000617623 /* Club.m */,
+				780E4B941DD7484C00617623 /* Match.h */,
+				780E4B951DD7484C00617623 /* Match.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +278,7 @@
 				780E4B681DD7457200617623 /* LaunchScreen.storyboard in Resources */,
 				780E4B651DD7457200617623 /* Assets.xcassets in Resources */,
 				780E4B631DD7457200617623 /* Main.storyboard in Resources */,
+				780E4B931DD7467600617623 /* models_test.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +303,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				780E4B901DD7461000617623 /* Club.m in Sources */,
+				780E4B8D1DD7459000617623 /* Player.m in Sources */,
 				780E4B601DD7457200617623 /* ViewController.m in Sources */,
+				780E4B961DD7484C00617623 /* Match.m in Sources */,
 				780E4B5D1DD7457200617623 /* AppDelegate.m in Sources */,
 				780E4B5A1DD7457200617623 /* main.m in Sources */,
 			);

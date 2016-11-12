@@ -1,0 +1,94 @@
+{
+  project: "FIFA_competitions",
+  models : [
+    {
+      name : "Player",
+      properties: {
+        name : String,
+        club: Club
+      }
+    },
+
+    {
+        name: "Club",
+        properties: {
+          title: String,
+          logo: Image
+        }
+    },
+
+    {
+      name: "Match",
+      properties: {
+        unit: OrganizationUnit,
+        competition: Competition
+        home: Player,
+        guest: Player,
+        homeGoals: Number,
+        guestGoals: Number,
+        date: Date
+      }
+    },
+
+    {
+      name: "Competition",
+      properties: {
+        title: String,
+        type: enum, // or not?
+        units: [OrganizationUnit],
+        stats: Statistics // merged Statistics
+      }
+    },
+
+    {
+      name: "Group",
+      inherits: "OrganizationUnit",
+      properties: {
+        competition: Competition,
+        name: String,
+        players: [Player],
+        stats: Statistics
+      }
+    },
+
+    {
+      name: "Tour",
+      inherits: "OrganizationUnit",
+      properties: {
+        competition: Competition,
+        number: Number,
+        players: [Player],
+        stats: Statistics
+      }
+    },
+
+    {
+      name: "TournamentStage", //1/8-final, 1/4-final, final ...
+      inherits: "OrganizationUnit",
+      properties: {
+        competition: Competition,
+        type: enum //1/8-final, 1/4-final, final ...
+      }
+    },
+
+    {
+      name: "Statistics",
+      properties: {
+        items: [StatisticsItem]
+      }
+    },
+
+    {
+      name: "StatisticsItem",
+      properties: {
+        player: Player,
+        wins: Number,
+        loss: Number,
+        draw: Number,
+        bf: Number,
+        ba: Number,
+        form: [enum] // W W D W for example
+      }
+    }
+  ]
+}
