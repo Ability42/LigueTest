@@ -10,5 +10,9 @@
 
 @implementation Match
 
+- (NSString*) description
+{
+    return [NSString stringWithFormat:@"%@ - %@", self.home, self.away];
+}
 
 @end

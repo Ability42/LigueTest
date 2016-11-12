@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Player.h"
+#import "Match.h"
 
 @interface AppDelegate ()
 
@@ -18,13 +19,57 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    Player *pl = [[Player alloc] init];
+
+    NSArray<Player*> *players = @[[[Player alloc] initWithName:@"Stepan"
+                                                       andClub:[[Club alloc] initWithTitle:@"Barcelona"]],
+                                  [[Player alloc] initWithName:@"Andy"
+                                                       andClub:[[Club alloc] initWithTitle:@"Real"]],
+                                  [[Player alloc] initWithName:@"Peter"
+                                                       andClub:[[Club alloc] initWithTitle:@"Atletiko"]],
+                                  [[Player alloc] initWithName:@"Tom"
+                                                       andClub:[[Club alloc] initWithTitle:@"Dinamo"]],
+                                  ];
     
-    [pl calculateTestSheldueForPlayers:@[@"Barcelona", @"Liverpol", @"Roma", @"Real"]];
     
+    NSArray<Match*> *resultMatches = [self createPlayersGameMatrix:players];
+    NSLog(@"%@", resultMatches);
     return YES;
 }
 
+- (NSArray<Match*>*) createPlayersGameMatrix:(NSArray<Player*>*)players
+{
+    
+    NSMutableArray<Match*> *matches = [[NSMutableArray alloc] init];
+    
+    NSUInteger playersCount = [players count];
+    NSMutableArray *tmpArrray = [players mutableCopy];
+    NSLog(@"Players: %@", players);
+    
+    
+    for (NSUInteger i = 0; i < playersCount; i++) {
+        if (i < playersCount-1) {
+            NSArray<Player*> *tmp = [tmpArrray subarrayWithRange:NSMakeRange(1, playersCount-1)];
+            [matches addObjectsFromArray:[self createMatchesForPlayer:[tmpArrray firstObject] withPlayers:tmp]];
+            [tmpArrray exchangeObjectAtIndex:0 withObjectAtIndex:i+1];
+        }
+    }
+    [matches addObjectsFromArray:[self createMatchesForPlayer:[players lastObject] withPlayers:[players subarrayWithRange:NSMakeRange(0, playersCount - 1)]]];
+    
+    return matches;
+}
+
+- (NSArray<Match*>*) createMatchesForPlayer:(Player*)player withPlayers:(NSArray<Player*>*) players
+{
+    NSMutableArray<Match*> *matches = [[NSMutableArray alloc] initWithCapacity:[players count]];
+    
+    for (Player *pl in players) {
+        Match *match = [[Match alloc] init];
+        match.home = player;
+        match.away = pl;
+        [matches addObject:match];
+    }
+    return matches;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
