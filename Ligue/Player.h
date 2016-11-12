@@ -14,4 +14,9 @@
 @property (nonatomic) NSString* name;
 @property (nonatomic) Club* club;
 
+
+- (instancetype)initWithName:(NSString*)name andClub:(Club*)club;
+- (void) createPlayersGameMatrix:(NSArray*)players;
+- (void) calculateMatchWithGameMatrix:(NSArray*)matrix;
+
 @end

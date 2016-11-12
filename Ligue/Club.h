@@ -14,4 +14,7 @@
 @property (nonatomic) NSString *title;
 @property (nonatomic) UIImage *image;
 
+- (instancetype)initWithTitle:(NSString*)title;
+
+
 @end
