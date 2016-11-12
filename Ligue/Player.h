@@ -14,4 +14,6 @@
 @property (nonatomic) NSString* name;
 @property (nonatomic) Club* club;
 
+- (void) calculateTestSheldueForPlayers:(NSArray*)players;
+
 @end

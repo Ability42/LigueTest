@@ -10,4 +10,20 @@
 
 @implementation Player
 
+- (void) calculateTestSheldueForPlayers:(NSArray*)players
+{
+    NSUInteger playersCount = [players count];
+    
+    NSMutableArray *tmpArrray = [NSMutableArray arrayWithArray:players];
+    NSLog(@"Players: %@", players);
+    
+    for (NSUInteger i = 0; i < playersCount; i++) {
+        if (i < playersCount-1) {
+            [tmpArrray exchangeObjectAtIndex:0 withObjectAtIndex:i+1];
+            NSLog(@"tmpArray: %@", tmpArrray);
+        }
+    }
+    
+}
+
 @end

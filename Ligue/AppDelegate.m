@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Player.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    Player *pl = [[Player alloc] init];
+    
+    [pl calculateTestSheldueForPlayers:@[@"Barcelona", @"Liverpol", @"Roma", @"Real"]];
+    
     return YES;
 }
 
