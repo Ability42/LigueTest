@@ -544,6 +544,7 @@
 				780E4B841DD7457200617623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		780E4B851DD7457200617623 /* Build configuration list for PBXNativeTarget "LigueTests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +553,7 @@
 				780E4B871DD7457200617623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		780E4B881DD7457200617623 /* Build configuration list for PBXNativeTarget "LigueUITests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +562,7 @@
 				780E4B8A1DD7457200617623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

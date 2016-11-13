@@ -28,6 +28,10 @@
                                                        andClub:[[Club alloc] initWithTitle:@"Atletiko"]],
                                   [[Player alloc] initWithName:@"Tom"
                                                        andClub:[[Club alloc] initWithTitle:@"Dinamo"]],
+                                  [[Player alloc] initWithName:@"Jerry"
+                                                       andClub:[[Club alloc] initWithTitle:@"Manchester"]],
+                                  [[Player alloc] initWithName:@"Kim"
+                                                       andClub:[[Club alloc] initWithTitle:@"Chelsea"]],
                                   ];
     
     
