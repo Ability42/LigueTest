@@ -10,6 +10,7 @@
 #import "Player.h"
 #import "Match.h"
 #import "Tournament.h"
+#import "Stage.h"
 
 @interface AppDelegate ()
 
@@ -43,9 +44,12 @@
     // Tournament Test
     
     Tournament *tournament = [[Tournament alloc] initWithPlayers:players];
-    NSLog(@"Players %@", players);
-    NSArray *randPlayers = [tournament randomIndexesForPlayers:players];
-    NSLog(@"RandPlayers %@", randPlayers);
+    
+    NSArray<Stage*> *stagesArray = [tournament shleldueForPlayers:players];
+    
+    for (Stage* stage in stagesArray) {
+        NSLog(@"%@",stage);
+    }
     
     return YES;
 }
