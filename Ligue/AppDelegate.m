@@ -34,6 +34,10 @@
                                                        andClub:[[Club alloc] initWithTitle:@"Manchester"]],
                                   [[Player alloc] initWithName:@"Kim"
                                                        andClub:[[Club alloc] initWithTitle:@"Chelsea"]],
+                                  [[Player alloc] initWithName:@"Donald"
+                                                       andClub:[[Club alloc] initWithTitle:@"Arsenal"]],
+                                  [[Player alloc] initWithName:@"Sasha"
+                                                       andClub:[[Club alloc] initWithTitle:@"Shakhtar"]],
                                   ];
     
     
@@ -43,14 +47,42 @@
     
     // Tournament Test
     
-    Tournament *tournament = [[Tournament alloc] initWithPlayers:players];
-    
+    Tournament *tournament = [[Tournament alloc] initWithPlayers:players withKnockoutType:YES];
     NSArray<Stage*> *stagesArray = [tournament shleldueForPlayers:players];
+    [tournament setRandomGoalsForCurrentStages];
+    NSLog(@"Stage 1/%d", [players count]*2);
     
     for (Stage* stage in stagesArray) {
         NSLog(@"%@",stage);
     }
     
+    
+    players = [tournament reloadSheldueAfterStage];
+    stagesArray = [tournament shleldueForPlayers:players];
+    [tournament setRandomGoalsForCurrentStages];
+
+    NSLog(@"Stage 1/%d", [players count]*2);
+    for (Stage* stage in stagesArray) {
+        NSLog(@"%@",stage);
+    }
+    
+    
+    players = [tournament reloadSheldueAfterStage];
+    stagesArray = [tournament shleldueForPlayers:players];
+    [tournament setRandomGoalsForCurrentStages];
+    NSLog(@"Stage 1/%d", [players count]*2);
+    for (Stage* stage in stagesArray) {
+        NSLog(@"%@",stage);
+    }
+    
+    
+
+    players = [tournament reloadSheldueAfterStage];
+    [tournament setRandomGoalsForCurrentStages];
+    NSLog(@"Stage 1/%d", [players count]*2);
+    stagesArray = [tournament shleldueForPlayers:players];
+
+
     return YES;
 }
 

@@ -10,9 +10,15 @@
 
 @implementation Match
 
+
 - (NSString*) description
 {
     return [NSString stringWithFormat:@"%@ - %@", self.home, self.away];
+}
+
+- (void) resetScoreToZero {
+    self.homeGoals = 0;
+    self.awayGoals = 0;
 }
 
 @end

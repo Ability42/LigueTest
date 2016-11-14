@@ -22,6 +22,6 @@
 
 - (NSString*)description
 {
-    return [NSString stringWithFormat:@"Home: %@, Away: %@", self.home, self.away];
+    return [NSString stringWithFormat:@"%@ %lu:%lu %@", self.home, (unsigned long)self.homeGoals, (unsigned long)self.awayGoals,self.away];
 }
 @end

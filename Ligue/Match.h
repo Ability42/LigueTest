@@ -18,4 +18,6 @@
 
 @property (nonatomic) NSDate *date;
 
+
+- (void) resetScoreToZero;
 @end
