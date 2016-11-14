@@ -25,20 +25,21 @@
 
 
 #pragma mark - Tournament stand methods
-
-- (NSArray<Stage *> *) shleldueForPlayers:(NSArray<Player *> *)players
+/// Accepts array of players and returns array of balanced tournament matches
+- (NSArray<Stage*>*) shleldueForPlayers:(NSArray<Player*>*)players
 {
     NSArray<Player*> *shuffledPlayers = [self shufflePlayers:players];
+    self.players = shuffledPlayers;
     
     NSMutableArray *stagesMutable = [[NSMutableArray alloc] initWithCapacity:[shuffledPlayers count]/2];
     
     if ([shuffledPlayers count] < 2) {
-        NSLog(@"Winner: %@!!!", [shuffledPlayers objectAtIndex:0]);
+        self.winner = [self.players objectAtIndex:0];
         
     } else {
     
         if (self.knockout) {
-            for (int i = 0; i < [shuffledPlayers count]; i++) {
+            for (int i = 0; i < [self.players count]; i++) {
                 if (i%2) {
                     Player *homePl = shuffledPlayers[i-1];
                     Player *awayPl = shuffledPlayers[i];
@@ -54,7 +55,7 @@
     return stagesMutable;
 }
 
-- (NSArray<Player*>*) reloadSheldueAfterStage
+- (NSArray<Stage*>*) reloadSheldueAfterStage
 {
     
     NSMutableArray<Player*> *playersInCurrentStage = [[NSMutableArray alloc] initWithCapacity:[self.currentStages count]];
@@ -76,34 +77,24 @@
             // Penalty series
             // This line of code prevented from running in Match init Method
             [playersInCurrentStage addObject:stageWinner];
+            
         }
     }
-    
-    return playersInCurrentStage;
+    NSArray<Stage*> *stages = [self shleldueForPlayers:playersInCurrentStage];
+    return stages;
     
 }
 
 - (NSArray<Player *> *) shufflePlayers:(NSArray<Player *> *)players
 {
-    NSMutableArray<Player*> *initialArray = [NSMutableArray arrayWithArray:players];
+    NSMutableArray<Player*> *shuffledPlayersArray = [NSMutableArray arrayWithArray:players];
     for (int i = 0; i<[players count]; i++) {
         int randomIndex = arc4random()%[players count];
-        [initialArray exchangeObjectAtIndex:i withObjectAtIndex:randomIndex];
+        [shuffledPlayersArray exchangeObjectAtIndex:i withObjectAtIndex:randomIndex];
     }
-    return initialArray;
+    return shuffledPlayersArray;
 }
 
-- (BOOL) correctNumberOfInitialTeams {
-    NSUInteger numberOfPlayers = [self.players count];
-    while (numberOfPlayers == 1) {
-        numberOfPlayers = numberOfPlayers / 2;
-    }
-    if (numberOfPlayers == 1) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 #pragma mark - Test methods
 

@@ -18,14 +18,13 @@
 @property (nonatomic) NSMutableArray<Stage*>* initialStages;
 @property (nonatomic) NSMutableArray<Stage*>* currentStages;
 @property (nonatomic) BOOL knockout;
+@property (nonatomic) Player *winner;
 // Gropus property need?
 // yes need but it will br Stage 
 
 - (instancetype)initWithPlayers:(NSArray<Player*>*)players withKnockoutType:(BOOL)knockout;
 - (NSArray<Stage *> *) shleldueForPlayers:(NSArray<Player*>*)players;
 - (NSArray<Player *> *) shufflePlayers:(NSArray<Player *> *)players;
-- (NSArray<Player*>*) reloadSheldueAfterStage;
+- (NSArray<Stage*>*) reloadSheldueAfterStage;
 - (void) setRandomGoalsForCurrentStages;
-- (BOOL) correctNumberOfInitialTeams;
-
 @end
