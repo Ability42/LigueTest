@@ -66,7 +66,7 @@
       name: "TournamentStage", //1/8-final, 1/4-final, final ...
       inherits: "OrganizationUnit",
       properties: {
-        competition: Competition,
+        competition: Competition,          
         type: enum //1/8-final, 1/4-final, final ...
       }
     },

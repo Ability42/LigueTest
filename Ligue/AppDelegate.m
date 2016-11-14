@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "Player.h"
 #import "Match.h"
+#import "Tournament.h"
 
 @interface AppDelegate ()
 
@@ -35,8 +36,17 @@
                                   ];
     
     
+    
     NSArray<Match*> *resultMatches = [self createPlayersGameMatrix:players];
     NSLog(@"%@", resultMatches);
+    
+    // Tournament Test
+    
+    Tournament *tournament = [[Tournament alloc] initWithPlayers:players];
+    NSLog(@"Players %@", players);
+    NSArray *randPlayers = [tournament randomIndexesForPlayers:players];
+    NSLog(@"RandPlayers %@", randPlayers);
+    
     return YES;
 }
 

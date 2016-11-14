@@ -19,6 +19,7 @@
 		780E4B901DD7461000617623 /* Club.m in Sources */ = {isa = PBXBuildFile; fileRef = 780E4B8F1DD7461000617623 /* Club.m */; };
 		780E4B931DD7467600617623 /* models_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 780E4B921DD7467600617623 /* models_test.json */; };
 		780E4B961DD7484C00617623 /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 780E4B951DD7484C00617623 /* Match.m */; };
+		78E4F0FF1DD911EC00A47244 /* Tournament.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E4F0FE1DD911EC00A47244 /* Tournament.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		780E4B921DD7467600617623 /* models_test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = models_test.json; sourceTree = "<group>"; };
 		780E4B941DD7484C00617623 /* Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Match.h; sourceTree = "<group>"; };
 		780E4B951DD7484C00617623 /* Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Match.m; sourceTree = "<group>"; };
+		78E4F0FD1DD911EC00A47244 /* Tournament.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tournament.h; sourceTree = "<group>"; };
+		78E4F0FE1DD911EC00A47244 /* Tournament.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tournament.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +165,8 @@
 				780E4B8F1DD7461000617623 /* Club.m */,
 				780E4B941DD7484C00617623 /* Match.h */,
 				780E4B951DD7484C00617623 /* Match.m */,
+				78E4F0FD1DD911EC00A47244 /* Tournament.h */,
+				78E4F0FE1DD911EC00A47244 /* Tournament.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 			files = (
 				780E4B901DD7461000617623 /* Club.m in Sources */,
 				780E4B8D1DD7459000617623 /* Player.m in Sources */,
+				78E4F0FF1DD911EC00A47244 /* Tournament.m in Sources */,
 				780E4B601DD7457200617623 /* ViewController.m in Sources */,
 				780E4B961DD7484C00617623 /* Match.m in Sources */,
 				780E4B5D1DD7457200617623 /* AppDelegate.m in Sources */,
