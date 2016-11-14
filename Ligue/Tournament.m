@@ -10,31 +10,38 @@
 
 @implementation Tournament
 
+#pragma mark - Initialization
+
 - (instancetype)initWithPlayers:(NSArray<Player*>*)players withKnockoutType:(BOOL)knockout
 {
     self = [super init];
     if (self) {
         self.knockout = knockout;
-        self.players = [self shufflePlayers:self.players];
+        self.players = players;
         self.initialStages = [[NSMutableArray alloc] initWithCapacity:[players count]/2];
     }
     return self;
 }
 
+
+#pragma mark - Tournament stand methods
+
 - (NSArray<Stage *> *) shleldueForPlayers:(NSArray<Player *> *)players
 {
-    NSMutableArray *stagesMutable = [[NSMutableArray alloc] initWithCapacity:[players count]/2];
+    NSArray<Player*> *shuffledPlayers = [self shufflePlayers:players];
     
-    if ([players count] < 2) {
-        NSLog(@"Winner: %@!!!", [players objectAtIndex:0]);
+    NSMutableArray *stagesMutable = [[NSMutableArray alloc] initWithCapacity:[shuffledPlayers count]/2];
+    
+    if ([shuffledPlayers count] < 2) {
+        NSLog(@"Winner: %@!!!", [shuffledPlayers objectAtIndex:0]);
+        
     } else {
     
-        
         if (self.knockout) {
-            for (int i = 0; i < [players count]; i++) {
+            for (int i = 0; i < [shuffledPlayers count]; i++) {
                 if (i%2) {
-                    Player *homePl = players[i-1];
-                    Player *awayPl = players[i];
+                    Player *homePl = shuffledPlayers[i-1];
+                    Player *awayPl = shuffledPlayers[i];
                     Stage *stage = [[Stage alloc] initWithHomePlayer:homePl andAwayPlayer:awayPl];
                     [stagesMutable addObject:stage];
                 }
@@ -85,6 +92,20 @@
     }
     return initialArray;
 }
+
+- (BOOL) correctNumberOfInitialTeams {
+    NSUInteger numberOfPlayers = [self.players count];
+    while (numberOfPlayers == 1) {
+        numberOfPlayers = numberOfPlayers / 2;
+    }
+    if (numberOfPlayers == 1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+#pragma mark - Test methods
 
 - (void) setRandomGoalsForCurrentStages {
     for (int i = 0; i < [self.currentStages count]; i++) {

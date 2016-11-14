@@ -53,7 +53,7 @@
 }
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"Player %@(%@)", self.name, self.club.title];
+    return [NSString stringWithFormat:@"%@(%@)", self.name, self.club.title];
 }
 
 

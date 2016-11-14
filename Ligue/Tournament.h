@@ -26,5 +26,6 @@
 - (NSArray<Player *> *) shufflePlayers:(NSArray<Player *> *)players;
 - (NSArray<Player*>*) reloadSheldueAfterStage;
 - (void) setRandomGoalsForCurrentStages;
+- (BOOL) correctNumberOfInitialTeams;
 
 @end
