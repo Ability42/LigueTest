@@ -98,12 +98,12 @@
         //self.tournament = tournament;
         
         NSArray<Match*> *matches = [tournament initialMatchesWithPlayers:players withKnockout:knockoutType];
-        [tournament setRandomGoalsForCurrentStages];
+        //[tournament setRandomGoalsForCurrentStages];
         
         for (NSUInteger i = [tournament.players count]/2; i > 0; i = i/2) {
             NSLog(@"Stage 1/%ld %@", i, matches);
             matches = [tournament nextStageWithKnockoutType:knockoutType];
-            [tournament setRandomGoalsForCurrentStages];
+            //[tournament setRandomGoalsForCurrentStages];
         }
     }
     
