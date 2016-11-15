@@ -7,8 +7,7 @@
 //
 
 #import "Tournament.h"
-
-
+#import "Group.h"
 
 @implementation Tournament
 
@@ -18,12 +17,21 @@
 {
     self = [super init];
     if (self) {
-        self.players = players;
+        self.players = [self shufflePlayers:players;
         self.initialMatches = [[NSMutableArray alloc] initWithCapacity:[players count]/2];
     }
     return self;
 }
 
+#pragma mark - Lazy Instantiation
+
+- (NSMutableArray<Group*>*) groups
+{
+    if (!_groups) {
+        _groups = [[NSMutableArray alloc] initWithCapacity:[self.players count]/4];
+    }
+    return _groups;
+}
 
 #pragma mark - Tournament stand methods
 
@@ -93,6 +101,29 @@
         [shuffledPlayersArray exchangeObjectAtIndex:i withObjectAtIndex:randomIndex];
     }
     return shuffledPlayersArray;
+}
+
+- (NSArray<Group*>*) createGroupsWithPlayers:(NSArray<Player*>*)players {
+    
+    NSMutableArray<Player*> *playersForGroup = [[NSMutableArray alloc] initWithArray:players];
+    
+    for (int i = 0; i < [self.players count]; i++) {
+        
+        if (playersForGroup) {
+            if (i % 4 == 0) {
+                NSRange effectiveRange = NSMakeRange(0,4);
+                Group *group = [[Group alloc] initWithName:[NSString stringWithFormat:@"Group #%d", i/4] andPlayers:[playersForGroup subarrayWithRange:effectiveRange]];
+                [playersForGroup removeObjectsInRange:effectiveRange];
+                [self.groups addObject:group];
+            }
+        } else {
+            NSLog(@"Groups created");
+            break;
+        }
+        
+    }
+    
+    return self.groups;
 }
 
 

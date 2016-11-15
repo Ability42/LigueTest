@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "Match.h"
+#import "Group.h"
 
 @interface Tournament : NSObject
 
 @property (nonatomic) NSArray<Player*>* players;
 @property (nonatomic) NSArray<Match*>* initialMatches;
 @property (nonatomic) BOOL *teamAlreadyPlayFirstGame; //only if !knockoutType
+@property (nonatomic) NSMutableArray<Group*>* groups;
 
 
 
@@ -22,6 +24,7 @@
 - (NSArray<Match*>*) initialMatchesWithPlayers:(NSArray<Player*>*)players withKnockout:(BOOL)knockout;
 - (NSArray<Player *> *) shufflePlayers:(NSArray<Player *> *)players;
 - (NSArray<Match*>*) nextStageWithKnockoutType:(BOOL)knockout;
+- (NSArray<Group*>*) createGroupsWithPlayers:(NSArray<Player*>*)players;
 
 - (void) setRandomGoalsForCurrentStages;
 - (BOOL) isWinner;

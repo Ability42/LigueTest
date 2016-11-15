@@ -1,4 +1,4 @@
-//
+
 //  AppDelegate.m
 //  Ligue
 //
@@ -40,73 +40,31 @@
                                   [[Player alloc] initWithName:@"John"
                                                        andClub:[[Club alloc] initWithTitle:@"Borussia D."]]
                                   ];
+    
     self.players = players;
     static BOOL knockoutType = YES;
-    
-/*
 
-    NSArray<Match*> *resultMatches = [self createPlayersGameMatrix:players];
-    NSLog(@"%@", resultMatches);
-    
-    // Tournament, you may think those is a shitty code(because it's staightforward^ without any loop),
-    // but it's test code, and it good for testing our model
     
     
-    Tournament *tournament = [[Tournament alloc] initWithPlayers:players withKnockoutType:YES];
-    if ([tournament correctNumberOfInitialTeams]) {
-        NSArray<Stage*> *stagesArray = [tournament shleldueForPlayers:players];
-        [tournament setRandomGoalsForCurrentStages];
-        NSLog(@"Stage 1/%lu", (unsigned long)[players count]);
-        
-        for (Stage* stage in stagesArray) {
-            NSLog(@"%@",stage);
-        }
-        
-        
-        players = [tournament reloadSheldueAfterStage];
-        stagesArray = [tournament shleldueForPlayers:players];
-        [tournament setRandomGoalsForCurrentStages];
-        
-        NSLog(@"Stage 1/%lu", (unsigned long)[players count]);
-        for (Stage* stage in stagesArray) {
-            NSLog(@"%@",stage);
-        }
-        
-        
-        players = [tournament reloadSheldueAfterStage];
-        stagesArray = [tournament shleldueForPlayers:players];
-        [tournament setRandomGoalsForCurrentStages];
-        NSLog(@"Stage 1/%lu", (unsigned long)[players count]);
-        for (Stage* stage in stagesArray) {
-            NSLog(@"%@",stage);
-        }
-        
-        
-        
-        players = [tournament reloadSheldueAfterStage];
-        [tournament setRandomGoalsForCurrentStages];
-        NSLog(@"Stage 1/%lu", (unsigned long)[players count]);
-        stagesArray = [tournament shleldueForPlayers:players];
-        
-    } else {
-        NSLog(@"Number of teams must be exp^2");
-    }
-*/
     Tournament *tournament = [[Tournament alloc] initWithPlayers:players withKnockoutType:knockoutType];
-
+/*
     while ([self correctNumberOfInitialTeamsInTournament:tournament]) {
         //self.tournament = tournament;
         
         NSArray<Match*> *matches = [tournament initialMatchesWithPlayers:players withKnockout:knockoutType];
-        //[tournament setRandomGoalsForCurrentStages];
+        [tournament setRandomGoalsForCurrentStages];
         
         for (NSUInteger i = [tournament.players count]/2; i > 0; i = i/2) {
             NSLog(@"Stage 1/%ld %@", i, matches);
             matches = [tournament nextStageWithKnockoutType:knockoutType];
-            //[tournament setRandomGoalsForCurrentStages];
+            [tournament setRandomGoalsForCurrentStages];
         }
     }
-    
+*/
+    NSArray<Group*> *groups = [tournament createGroupsWithPlayers:players];
+    for (Group *group in groups) {
+        NSLog(@"Group Name: %@ \n %@",group.name,group.players);
+    }
     return YES;
 }
 

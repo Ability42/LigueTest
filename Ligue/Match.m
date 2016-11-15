@@ -27,7 +27,7 @@
 
 - (NSString*)description
 {
-    if (self.homeGoals == nil || self.awayGoals == nil) {
+    if (self.homeGoals == nil && self.awayGoals == nil) {
         
         return [NSString stringWithFormat:@"%@ not played yet:not played yet %@", self.home, self.away];
         
