@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Match.h"
 #import "Group.h"
+#import "Penalty.h"
 
 @interface Tournament : NSObject
 
@@ -22,7 +23,7 @@
 - (instancetype)initWithPlayers:(NSArray<Player*>*)players withKnockoutType:(BOOL)knockout;
 
 - (NSArray<Match*>*) initialMatchesWithPlayers:(NSArray<Player*>*)players withKnockout:(BOOL)knockout;
-- (NSArray<Player *> *) shufflePlayers:(NSArray<Player *> *)players;
+- (NSArray<Player*>*) shufflePlayers:(NSArray<Player *> *)players;
 - (NSArray<Match*>*) nextStageWithKnockoutType:(BOOL)knockout;
 - (NSArray<Group*>*) createGroupsWithPlayers:(NSArray<Player*>*)players;
 

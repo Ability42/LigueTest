@@ -7,7 +7,8 @@
 //
 
 #import "Tournament.h"
-#import "Group.h"
+
+
 
 @implementation Tournament
 
@@ -60,7 +61,6 @@
                 }
             }
         } else {
-            // if each Player plays Matches home and away
             
         }
         
