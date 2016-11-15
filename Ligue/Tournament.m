@@ -17,8 +17,12 @@
 {
     self = [super init];
     if (self) {
-        self.players = [self shufflePlayers:players;
+        self.players = [self shufflePlayers:players];
         self.initialMatches = [[NSMutableArray alloc] initWithCapacity:[players count]/2];
+        //check if group stage needed
+        if ([self.players count] > 7) {
+            [self createGroupsWithPlayers:[self shufflePlayers:players]];
+        }
     }
     return self;
 }
@@ -38,12 +42,13 @@
 /// Accepts array of players and returns array of balanced tournament matches
 - (NSArray<Match*>*) initialMatchesWithPlayers:(NSArray<Player*>*)players withKnockout:(BOOL)knockout
 {
-    NSArray<Player*> *shuffledPlayers = [self shufflePlayers:players];
+    NSArray<Player*> *shuffledPlayers = players;
     NSMutableArray<Match*> *matches = [[NSMutableArray alloc] initWithCapacity:[self.players count]/2];
     self.players = shuffledPlayers;
     
     if ([self isWinner]) {
         NSLog(@"Winner: %@", [self.players lastObject]);
+        _winner = YES;
     } else {
         if (knockout) {
             for (int i = 0; i < [self.players count]; i++) {
@@ -68,18 +73,18 @@
 - (NSArray<Match*>*) nextStageWithKnockoutType:(BOOL)knockout
 {
     
-    NSMutableArray<Player*> *playersInCurrentStage = [[NSMutableArray alloc] initWithCapacity:[self.initialMatches count]];
+    NSMutableArray<Player*> *playersInCurrentStage = [[NSMutableArray alloc] init];
     
-    
+    Player *matchWinner = nil;
     for (int i = 0; i < [self.initialMatches count]; i++) {
         Match *match = self.initialMatches[i];
         
         if (match.homeGoals > match.awayGoals) {
-            Player *matchWinner = match.home;
+            matchWinner = match.home;
             [playersInCurrentStage addObject:matchWinner];
             
         } else if(match.homeGoals < match.awayGoals) {
-            Player *matchWinner = match.away;
+            matchWinner = match.away;
             [playersInCurrentStage addObject:matchWinner];
             
         } else {
@@ -103,13 +108,15 @@
     return shuffledPlayersArray;
 }
 
+#pragma mark - Group stage
+
 - (NSArray<Group*>*) createGroupsWithPlayers:(NSArray<Player*>*)players {
     
     NSMutableArray<Player*> *playersForGroup = [[NSMutableArray alloc] initWithArray:players];
     
     for (int i = 0; i < [self.players count]; i++) {
         
-        if (playersForGroup) {
+        if ([playersForGroup count] > 0) {
             if (i % 4 == 0) {
                 NSRange effectiveRange = NSMakeRange(0,4);
                 Group *group = [[Group alloc] initWithName:[NSString stringWithFormat:@"Group #%d", i/4] andPlayers:[playersForGroup subarrayWithRange:effectiveRange]];

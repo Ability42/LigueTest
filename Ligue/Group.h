@@ -14,7 +14,7 @@
 
 @property (nonatomic) NSString* name;
 @property (nonatomic) NSArray<Player*>* players;
-@property (nonatomic, getter=isAllMatchesPlayed) BOOL allMatchesPlayed;
+@property (nonatomic) BOOL allMatchesPlayed;
 
 
 - (instancetype)initWithName:(NSString*)name andPlayers:(NSArray<Player*>*)players;

@@ -14,7 +14,6 @@
 @interface AppDelegate ()
 
 @property(nonatomic) Tournament *tournament;
-@property(nonatomic) NSArray<Player*> *players;
 @end
 
 @implementation AppDelegate
@@ -41,17 +40,16 @@
                                                        andClub:[[Club alloc] initWithTitle:@"Borussia D."]]
                                   ];
     
-    self.players = players;
     static BOOL knockoutType = YES;
 
     
     
     Tournament *tournament = [[Tournament alloc] initWithPlayers:players withKnockoutType:knockoutType];
-/*
-    while ([self correctNumberOfInitialTeamsInTournament:tournament]) {
+
+    while ([self correctNumberOfInitialTeamsInTournament:tournament] && !tournament.winner) {
         //self.tournament = tournament;
         
-        NSArray<Match*> *matches = [tournament initialMatchesWithPlayers:players withKnockout:knockoutType];
+        NSArray<Match*> *matches = [tournament initialMatchesWithPlayers:tournament.players withKnockout:knockoutType];
         [tournament setRandomGoalsForCurrentStages];
         
         for (NSUInteger i = [tournament.players count]/2; i > 0; i = i/2) {
@@ -60,9 +58,9 @@
             [tournament setRandomGoalsForCurrentStages];
         }
     }
-*/
-    NSArray<Group*> *groups = [tournament createGroupsWithPlayers:players];
-    for (Group *group in groups) {
+
+    //NSArray<Group*> *groups = [tournament createGroupsWithPlayers:players];
+    for (Group *group in tournament.groups) {
         NSLog(@"Group Name: %@ \n %@",group.name,group.players);
     }
     return YES;
@@ -72,7 +70,7 @@
 
 - (BOOL) correctNumberOfInitialTeamsInTournament:(Tournament*)tournament {
     NSUInteger numberOfPlayers = [tournament.players count];
-    while (numberOfPlayers != 1) {
+    while (numberOfPlayers > 1) {
         numberOfPlayers = numberOfPlayers / 2;
     }
     if (numberOfPlayers == 1) {

@@ -16,7 +16,7 @@
 @property (nonatomic) NSArray<Match*>* initialMatches;
 @property (nonatomic) BOOL *teamAlreadyPlayFirstGame; //only if !knockoutType
 @property (nonatomic) NSMutableArray<Group*>* groups;
-
+@property (nonatomic) BOOL winner;
 
 
 - (instancetype)initWithPlayers:(NSArray<Player*>*)players withKnockoutType:(BOOL)knockout;
