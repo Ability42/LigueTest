@@ -10,15 +10,24 @@
 
 @implementation Match
 
-
-- (NSString*) description
-{
-    return [NSString stringWithFormat:@"%@ - %@", self.home, self.away];
-}
-
 - (void) resetScoreToZero {
     self.homeGoals = 0;
     self.awayGoals = 0;
+}
+
+- (instancetype)initWithHomePlayer:(Player*)home andAwayPlayer:(Player*)away
+{
+    self = [super init];
+    if (self) {
+        self.home = home;
+        self.away = away;
+    }
+    return self;
+}
+
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"%@ %lu:%lu %@", self.home, (unsigned long)self.homeGoals, (unsigned long)self.awayGoals,self.away];
 }
 
 @end

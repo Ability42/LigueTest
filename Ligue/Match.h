@@ -18,6 +18,7 @@
 
 @property (nonatomic) NSDate *date;
 
+- (instancetype)initWithHomePlayer:(Player*)home andAwayPlayer:(Player*)away;
 
 - (void) resetScoreToZero;
 @end

@@ -35,6 +35,12 @@
 - (void)testExample {
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    for (int i = 0; i<8; i++) {
+        if (i%2) {
+            NSLog(@" = %d", i%2);
+        }
+    }
 }
 
 @end

@@ -7,16 +7,14 @@
 //
 
 #import "AppDelegate.h"
-#import "Player.h"
+
 #import "Match.h"
 #import "Tournament.h"
-#import "Stage.h"
 
 @interface AppDelegate ()
 
 @property(nonatomic) Tournament *tournament;
 @property(nonatomic) NSArray<Player*> *players;
-@property(nonatomic) BOOL *winner;
 @end
 
 @implementation AppDelegate
@@ -43,6 +41,7 @@
                                                        andClub:[[Club alloc] initWithTitle:@"Borussia D."]]
                                   ];
     self.players = players;
+    static BOOL knockoutType = YES;
     
 /*
 
@@ -93,61 +92,39 @@
         NSLog(@"Number of teams must be exp^2");
     }
 */
-    
-    
-    while ([self correctNumberOfInitialTeams] && !self.winner) {
+    Tournament *tournament = [[Tournament alloc] initWithPlayers:players withKnockoutType:knockoutType];
+
+    while ([self correctNumberOfInitialTeamsInTournament:tournament]) {
+        //self.tournament = tournament;
         
-        Tournament *tournament = [self createTournamentForPlayers:self.players withKnockoutType:YES];
-        self.tournament = tournament;
-        
-        NSArray<Stage*> *stages = [self createInitialStageWithKnockoutType:YES];
+        NSArray<Match*> *matches = [tournament initialMatchesWithPlayers:players withKnockout:knockoutType];
         [tournament setRandomGoalsForCurrentStages];
         
         for (NSUInteger i = [tournament.players count]/2; i > 0; i = i/2) {
-            NSLog(@"Stage 1/%ld %@", i, stages);
-            stages = [self nextStageForPlayers];
+            NSLog(@"Stage 1/%ld %@", i, matches);
+            matches = [tournament nextStageWithKnockoutType:knockoutType];
             [tournament setRandomGoalsForCurrentStages];
-            if (i == 1) {
-                NSLog(@"Winner %@", tournament.winner);
-            }
         }
-        break;
     }
-    
     
     return YES;
 }
 
-#pragma mark - Model Test
-///Returns initial tournament stage
-- (Tournament*) createTournamentForPlayers:(NSArray<Player*>*)players withKnockoutType:(BOOL)knockout
-{
-    return [[Tournament alloc] initWithPlayers:players withKnockoutType:knockout];
-}
+#pragma mark - Model test
 
-///Returns inital tournament sheldue
-- (NSArray<Stage*>*) createInitialStageWithKnockoutType:(BOOL)knockout
-{
-    return [self.tournament shleldueForPlayers:self.tournament.players];
-}
-
-/// returns next stage after all teams played all matches in current stage
-- (NSArray<Stage*>*) nextStageForPlayers
-{
-    return [self.tournament reloadSheldueAfterStage];
-}
-
-- (BOOL) correctNumberOfInitialTeams {
-    NSUInteger numberOfPlayers = [self.players count];
-    while (numberOfPlayers == 1) {
+- (BOOL) correctNumberOfInitialTeamsInTournament:(Tournament*)tournament {
+    NSUInteger numberOfPlayers = [tournament.players count];
+    while (numberOfPlayers != 1) {
         numberOfPlayers = numberOfPlayers / 2;
     }
     if (numberOfPlayers == 1) {
-        return false;
-    } else {
         return true;
+    } else {
+        return false;
     }
 }
+
+
 
 #pragma mark - Game Matrix
 // We didn't use those method in our apps, that we have tournament_generator

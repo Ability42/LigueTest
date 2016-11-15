@@ -7,24 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Player.h"
-#import "Stage.h"
+#import "Match.h"
 
 @interface Tournament : NSObject
 
-
-
 @property (nonatomic) NSArray<Player*>* players;
-@property (nonatomic) NSMutableArray<Stage*>* initialStages;
-@property (nonatomic) NSMutableArray<Stage*>* currentStages;
-@property (nonatomic) BOOL knockout;
-@property (nonatomic) Player *winner;
-// Gropus property need?
-// yes need but it will br Stage 
+@property (nonatomic) NSArray<Match*>* initialMatches;
+@property (nonatomic) BOOL *teamAlreadyPlayFirstGame; //only if !knockoutType
+
+
 
 - (instancetype)initWithPlayers:(NSArray<Player*>*)players withKnockoutType:(BOOL)knockout;
-- (NSArray<Stage *> *) shleldueForPlayers:(NSArray<Player*>*)players;
+
+- (NSArray<Match*>*) initialMatchesWithPlayers:(NSArray<Player*>*)players withKnockout:(BOOL)knockout;
 - (NSArray<Player *> *) shufflePlayers:(NSArray<Player *> *)players;
-- (NSArray<Stage*>*) reloadSheldueAfterStage;
+- (NSArray<Match*>*) nextStageWithKnockoutType:(BOOL)knockout;
+
 - (void) setRandomGoalsForCurrentStages;
+- (BOOL) isWinner;
 @end
