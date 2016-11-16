@@ -15,7 +15,6 @@
 
 - (instancetype)initWithPlayers:(NSArray<Player*>*)players;
 
-@property (nonatomic) NSArray<Player*> *players;
 @property (nonatomic) GroupStage *groupStage;
 @property (nonatomic) TournamentStage *tournamentStage;
 

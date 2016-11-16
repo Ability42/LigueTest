@@ -17,7 +17,6 @@
         NSUInteger playersCount = [players count];
         
         if ([self correctNumberOfPlayers:playersCount]) {
-            self.players = players;
             if (playersCount > 8) {
                 GroupStage *groupStage = [[GroupStage alloc] initWithPlayers:players];
                 self.groupStage = groupStage;

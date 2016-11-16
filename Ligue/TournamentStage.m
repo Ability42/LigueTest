@@ -25,9 +25,9 @@
 
 - (NSArray<Match*>*) initialMatchesWithPlayers:(NSArray<Player*>*)players
 {
-    NSArray<Player*> *shuffledPlayers = players;
+    
     NSMutableArray<Match*> *matches = [[NSMutableArray alloc] initWithCapacity:[self.players count]/2];
-    self.players = shuffledPlayers;
+    self.players = players;
     
     if ([self isWinner]) {
         NSLog(@"Winner: %@", [self.players lastObject]);
@@ -52,36 +52,49 @@
 
 - (NSArray<Match*>*) nextStage
 {
-    
     NSMutableArray<Player*> *playersInCurrentStage = [[NSMutableArray alloc] init];
-    
-    Player *matchWinner = nil;
-    for (int i = 0; i < [self.initialMatches count]; i++) {
-        Match *match = self.initialMatches[i];
+    if ([self allMatchesPlayedInCurrentStage]) {
+
         
-        if (match.homeGoals > match.awayGoals) {
-            matchWinner = match.home;
-            [playersInCurrentStage addObject:matchWinner];
+        Player *matchWinner = nil;
+        for (int i = 0; i < [self.initialMatches count]; i++) {
+            Match *match = self.initialMatches[i];
             
-        } else if(match.homeGoals < match.awayGoals) {
-            matchWinner = match.away;
-            [playersInCurrentStage addObject:matchWinner];
-            
-        } else {
-            
-            // Penalty series
-            
+            if (match.homeGoals > match.awayGoals) {
+                matchWinner = match.home;
+                [playersInCurrentStage addObject:matchWinner];
+                
+            } else if(match.homeGoals < match.awayGoals) {
+                matchWinner = match.away;
+                [playersInCurrentStage addObject:matchWinner];
+                
+            }
         }
     }
     NSArray<Match*> *stages = [self initialMatchesWithPlayers:playersInCurrentStage];
     return stages;
 }
 
+- (BOOL) allMatchesPlayedInCurrentStage
+{
+    BOOL result = nil;
+    for (Match *match in self.initialMatches) {
+        if (match.homeGoals != -1 && match.awayGoals != -1) {
+            result = NO;
+        } else {
+            result = YES;
+            break;
+        }
+    }
+    return result;
+}
 
 - (BOOL) isWinner
 {
     return [self.players count] == 1 ? YES : NO;
 }
+
+
 
 @end
 
