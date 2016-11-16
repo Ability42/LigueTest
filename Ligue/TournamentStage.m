@@ -43,7 +43,7 @@
             }
         }
         
-        self.initialMatches = matches; // TODO: initialMatches needed?
+        self.currentMatches = matches; // TODO: initialMatches needed?
     }
     return matches;
 }
@@ -52,34 +52,30 @@
 
 - (NSArray<Match*>*) nextStage
 {
-    NSMutableArray<Player*> *playersInCurrentStage = [[NSMutableArray alloc] init];
-    if ([self allMatchesPlayedInCurrentStage]) {
-
-        
-        Player *matchWinner = nil;
-        for (int i = 0; i < [self.initialMatches count]; i++) {
-            Match *match = self.initialMatches[i];
-            
-            if (match.homeGoals > match.awayGoals) {
-                matchWinner = match.home;
-                [playersInCurrentStage addObject:matchWinner];
-                
-            } else if(match.homeGoals < match.awayGoals) {
-                matchWinner = match.away;
-                [playersInCurrentStage addObject:matchWinner];
-                
+    NSMutableArray *playersThatMovingInNextStage = [NSMutableArray array];
+    
+    if ([self allMatchesPlayedInCurrentStage] && ![self isWinner]) {
+        for (Match *match in self.currentMatches) {
+            if (match.homeGoals < match.awayGoals) {
+                [playersThatMovingInNextStage addObject:match.away];
+            } else if (match.homeGoals > match.awayGoals) {
+                [playersThatMovingInNextStage addObject:match.home];
+            } else {
+                //penalty series
             }
         }
     }
-    NSArray<Match*> *stages = [self initialMatchesWithPlayers:playersInCurrentStage];
-    return stages;
+    self.players = playersThatMovingInNextStage;
+    self.currentMatches = [self initialMatchesWithPlayers:playersThatMovingInNextStage];
+    
+    return self.currentMatches;
 }
 
 - (BOOL) allMatchesPlayedInCurrentStage
 {
     BOOL result = nil;
-    for (Match *match in self.initialMatches) {
-        if (match.homeGoals != -1 && match.awayGoals != -1) {
+    for (Match *match in self.currentMatches) {
+        if (match.homeGoals == -1 && match.awayGoals == -1) {
             result = NO;
         } else {
             result = YES;
@@ -88,6 +84,8 @@
     }
     return result;
 }
+
+//players(match) in currect stage
 
 - (BOOL) isWinner
 {

@@ -14,7 +14,7 @@
 
 @property (nonatomic) NSArray<Player*>* players;
 @property (nonatomic) BOOL winner;
-@property (nonatomic) NSArray<Match*>* initialMatches;
+@property (nonatomic) NSArray<Match*>* currentMatches;
 
 - (instancetype)initWithPlayers:(NSArray<Player*>*)players;
 

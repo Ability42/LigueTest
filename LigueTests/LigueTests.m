@@ -60,15 +60,22 @@
     for (Match* match in testMatches) {
         NSLog(@"%@", match);
     }
-    
+    testMatches = [testTournament.tournamentStage nextStage];
+    [self testSetRandomGoalsForMatches:testMatches];
+    for (Match* match in testMatches) {
+        NSLog(@"%@", match);
+    }
 
 }
 
 - (void)testSetRandomGoalsForMatches:(NSArray<Match*>*)matches
 {
     for (Match *match in matches) {
-        match.homeGoals = arc4random() % 4 + 1;
-        match.awayGoals = arc4random() % 4;
+        match.homeGoals = arc4random() % 5;
+        match.awayGoals = arc4random() % 5;
+        if (match.homeGoals == match.awayGoals) {
+            match.homeGoals = match.homeGoals+1;
+        }
     }
 }
 
