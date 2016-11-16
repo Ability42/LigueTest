@@ -18,6 +18,8 @@
 
 - (instancetype)initWithPlayers:(NSArray<Player*>*)players;
 
-- (NSArray<Match*>*) initialMatchesWithPlayers:(NSArray<Player*>*)players;
+- (NSArray<Match*>*) currentMatchesWithPlayers:(NSArray<Player*>*)players;
 - (NSArray<Match*>*) nextStage;
+
+
 @end

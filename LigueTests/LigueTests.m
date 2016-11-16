@@ -55,16 +55,18 @@
     
     
     
-    NSArray *testMatches = [testTournament.tournamentStage initialMatchesWithPlayers:players];
+    NSArray *testMatches = [testTournament.tournamentStage currentMatchesWithPlayers:players];
     [self testSetRandomGoalsForMatches:testMatches];
     for (Match* match in testMatches) {
         NSLog(@"%@", match);
     }
+    
     testMatches = [testTournament.tournamentStage nextStage];
     [self testSetRandomGoalsForMatches:testMatches];
     for (Match* match in testMatches) {
         NSLog(@"%@", match);
     }
+    
 
 }
 

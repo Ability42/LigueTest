@@ -23,7 +23,7 @@
 
 
 
-- (NSArray<Match*>*) initialMatchesWithPlayers:(NSArray<Player*>*)players
+- (NSArray<Match*>*) currentMatchesWithPlayers:(NSArray<Player*>*)players
 {
     
     NSMutableArray<Match*> *matches = [[NSMutableArray alloc] initWithCapacity:[self.players count]/2];
@@ -61,12 +61,12 @@
             } else if (match.homeGoals > match.awayGoals) {
                 [playersThatMovingInNextStage addObject:match.home];
             } else {
-                //penalty series
+                
             }
         }
     }
     self.players = playersThatMovingInNextStage;
-    self.currentMatches = [self initialMatchesWithPlayers:playersThatMovingInNextStage];
+    self.currentMatches = [self currentMatchesWithPlayers:playersThatMovingInNextStage];
     
     return self.currentMatches;
 }
@@ -85,7 +85,10 @@
     return result;
 }
 
-//players(match) in currect stage
+- (NSArray<Match*>*) matchesInCurrentStage
+{
+    return self.currentMatches;
+}
 
 - (BOOL) isWinner
 {
