@@ -21,13 +21,15 @@
     if (self) {
         self.home = home;
         self.away = away;
+        self.homeGoals = -1;
+        self.awayGoals = -1;
     }
     return self;
 }
 
 - (NSString*)description
 {
-    if (self.homeGoals == nil && self.awayGoals == nil) {
+    if (self.homeGoals == -1 && self.awayGoals == -1) {
         
         return [NSString stringWithFormat:@"%@ not played yet:not played yet %@", self.home, self.away];
         

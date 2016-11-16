@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Player.h"
+#import "Group.h"
 
 @interface Match : NSObject
 
@@ -15,6 +16,7 @@
 @property (nonatomic) Player *away; // "away" is the same like "guest", but syntactically correct
 @property (assign, nonatomic) NSUInteger homeGoals;
 @property (assign, nonatomic) NSUInteger awayGoals;
+@property (nonatomic) Group *group;
 
 @property (nonatomic) NSDate *date;
 

@@ -9,11 +9,10 @@
 #import "AppDelegate.h"
 
 #import "Match.h"
-#import "Tournament.h"
 
 @interface AppDelegate ()
 
-@property(nonatomic) Tournament *tournament;
+
 @end
 
 @implementation AppDelegate
@@ -22,102 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    NSArray<Player*> *players = @[[[Player alloc] initWithName:@"Stepan"
-                                                       andClub:[[Club alloc] initWithTitle:@"Barcelona"]],
-                                  [[Player alloc] initWithName:@"Andy"
-                                                       andClub:[[Club alloc] initWithTitle:@"Real"]],
-                                  [[Player alloc] initWithName:@"Peter"
-                                                       andClub:[[Club alloc] initWithTitle:@"Atletiko"]],
-                                  [[Player alloc] initWithName:@"Tom"
-                                                       andClub:[[Club alloc] initWithTitle:@"Dinamo"]],
-                                  [[Player alloc] initWithName:@"Jerry"
-                                                       andClub:[[Club alloc] initWithTitle:@"Manchester"]],
-                                  [[Player alloc] initWithName:@"Kim"
-                                                       andClub:[[Club alloc] initWithTitle:@"Chelsea"]],
-                                  [[Player alloc] initWithName:@"Donald"
-                                                       andClub:[[Club alloc] initWithTitle:@"Arsenal"]],
-                                  [[Player alloc] initWithName:@"John"
-                                                       andClub:[[Club alloc] initWithTitle:@"Borussia D."]]
-                                  ];
-    
-    static BOOL knockoutType = YES;
-
-    
-    
-    Tournament *tournament = [[Tournament alloc] initWithPlayers:players withKnockoutType:knockoutType];
-
-    while ([self correctNumberOfInitialTeamsInTournament:tournament] && !tournament.winner) {
-        //self.tournament = tournament;
-        
-        NSArray<Match*> *matches = [tournament initialMatchesWithPlayers:tournament.players withKnockout:knockoutType];
-        [tournament setRandomGoalsForCurrentStages];
-        
-        for (NSUInteger i = [tournament.players count]/2; i > 0; i = i/2) {
-            NSLog(@"Stage 1/%ld %@", i, matches);
-            matches = [tournament nextStageWithKnockoutType:knockoutType];
-            [tournament setRandomGoalsForCurrentStages];
-        }
-    }
-
-    //NSArray<Group*> *groups = [tournament createGroupsWithPlayers:players];
-    for (Group *group in tournament.groups) {
-        NSLog(@"Group Name: %@ \n %@",group.name,group.players);
-    }
     return YES;
-}
-
-#pragma mark - Model test
-
-- (BOOL) correctNumberOfInitialTeamsInTournament:(Tournament*)tournament {
-    NSUInteger numberOfPlayers = [tournament.players count];
-    while (numberOfPlayers > 1) {
-        numberOfPlayers = numberOfPlayers / 2;
-    }
-    if (numberOfPlayers == 1) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
-
-#pragma mark - Game Matrix
-// We didn't use those method in our apps, that we have tournament_generator
-
-- (NSArray<Match*>*) createPlayersGameMatrix:(NSArray<Player*>*)players
-{
-    
-    NSMutableArray<Match*> *matches = [[NSMutableArray alloc] init];
-    
-    NSUInteger playersCount = [players count];
-    NSMutableArray *tmpArrray = [players mutableCopy];
-    NSLog(@"Players: %@", players);
-    
-    
-    for (NSUInteger i = 0; i < playersCount; i++) {
-        if (i < playersCount-1) {
-            NSArray<Player*> *tmp = [tmpArrray subarrayWithRange:NSMakeRange(1, playersCount-1)];
-            [matches addObjectsFromArray:[self createMatchesForPlayer:[tmpArrray firstObject] withPlayers:tmp]];
-            [tmpArrray exchangeObjectAtIndex:0 withObjectAtIndex:i+1];
-        }
-    }
-    [matches addObjectsFromArray:[self createMatchesForPlayer:[players lastObject] withPlayers:[players subarrayWithRange:NSMakeRange(0, playersCount - 1)]]];
-    
-    return matches;
-}
-
-- (NSArray<Match*>*) createMatchesForPlayer:(Player*)player withPlayers:(NSArray<Player*>*) players
-{
-    NSMutableArray<Match*> *matches = [[NSMutableArray alloc] initWithCapacity:[players count]];
-    
-    for (Player *pl in players) {
-        Match *match = [[Match alloc] init];
-        match.home = player;
-        match.away = pl;
-        [matches addObject:match];
-    }
-    return matches;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

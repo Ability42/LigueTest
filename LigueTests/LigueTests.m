@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "Player.h"
+#import "Tournament.h"
 
 @interface LigueTests : XCTestCase
 
@@ -27,6 +29,47 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+}
+
+- (void) testTournamentFunctionality {
+    NSArray<Player*> *players = @[[[Player alloc] initWithName:@"Stepan"
+                                                       andClub:[[Club alloc] initWithTitle:@"Barcelona"]],
+                                  [[Player alloc] initWithName:@"Andy"
+                                                       andClub:[[Club alloc] initWithTitle:@"Real"]],
+                                  [[Player alloc] initWithName:@"Peter"
+                                                       andClub:[[Club alloc] initWithTitle:@"Atletiko"]],
+                                  [[Player alloc] initWithName:@"Tom"
+                                                       andClub:[[Club alloc] initWithTitle:@"Dinamo"]],
+                                  [[Player alloc] initWithName:@"Jerry"
+                                                       andClub:[[Club alloc] initWithTitle:@"Manchester"]],
+                                  [[Player alloc] initWithName:@"Kim"
+                                                       andClub:[[Club alloc] initWithTitle:@"Chelsea"]],
+                                  [[Player alloc] initWithName:@"Donald"
+                                                       andClub:[[Club alloc] initWithTitle:@"Arsenal"]],
+                                  [[Player alloc] initWithName:@"John"
+                                                       andClub:[[Club alloc] initWithTitle:@"Borussia D."]]
+                                  ];
+    
+    Tournament *testTournament = [[Tournament alloc] initWithPlayers:players];
+    
+    
+    
+    
+    NSArray *testMatches = [testTournament.tournamentStage initialMatchesWithPlayers:players];
+    [self testSetRandomGoalsForMatches:testMatches];
+    for (Match* match in testMatches) {
+        NSLog(@"%@", match);
+    }
+    
+
+}
+
+- (void)testSetRandomGoalsForMatches:(NSArray<Match*>*)matches
+{
+    for (Match *match in matches) {
+        match.homeGoals = arc4random() % 4 + 1;
+        match.awayGoals = arc4random() % 4;
+    }
 }
 
 - (void)testPerformanceExample {

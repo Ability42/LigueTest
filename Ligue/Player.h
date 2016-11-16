@@ -16,5 +16,5 @@
 
 
 - (instancetype)initWithName:(NSString*)name andClub:(Club*)club;
-- (void) createPlayersGameMatrix:(NSArray*)players;
+
 @end
