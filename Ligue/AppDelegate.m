@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import <Realm/Realm.h>
 #import "Match.h"
+#import "Cat.h"
+#import "Person.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +23,33 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    // Create object
+    
+    Cat *myCat1 = [[Cat alloc] init];
+    myCat1.name = @"Solomon";
+    myCat1.age = 10;
+    
+    Cat *myCat2 = [[Cat alloc] init];
+    myCat2.name = @"Tom";
+    myCat2.age = 42;
+    
+    Cat *myCat3 = [[Cat alloc] init];
+    myCat3.name = @"Cris";
+    myCat3.age = 13;
+    
+
+    // Persist data
+    
+    
+    
+    // Query Realm
+    RLMResults<Cat*> *catQuery = [Cat objectsWhere:@"age < 40"];
+    NSLog(@"catQuery.count: %lu", (unsigned long)catQuery.count);
+    
+    [realm beginWriteTransaction];
+    [realm deleteAllObjects];
+    [realm commitWriteTransaction];
+    
     return YES;
 }
 
